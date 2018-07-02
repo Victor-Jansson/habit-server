@@ -32,7 +32,7 @@ app.post('/track', (req, res) => {
 
 })
 
-const store = {}
+let store = {}
 function saveTracking(cookieId, type) {
     key = store[cookieId]
 
@@ -51,5 +51,16 @@ function saveTracking(cookieId, type) {
         log.error(error)
     }
 }
+
+(function init() {
+    fs.readFile('store.json', (err,data) => {
+        if (err) {
+            log.error(err)
+        } else {
+            store = JSON.parse(data)
+            log.info('Store loaded')
+        }
+    })
+})()
 
 app.listen(process.env.PORT, () => log.info('Example app listening on port ' + process.env.PORT))
