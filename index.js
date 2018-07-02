@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const fs = require('fs');
 const log = require('simple-node-logger').createSimpleLogger();
 const cors = require('cors')
+require('dotenv').config()
 
 app.use(express.json())
 app.use(morgan('combined'))
@@ -12,6 +13,10 @@ app.use(cors())
 
 app.get('/track', (req, res) => {
     res.send(store)
+})
+
+app.get('/track/:id', (req, res) => {
+    res.send(store[req.params.id])
 })
 app.post('/track', (req, res) => {
     const cookieId = _.get(req, 'body.cookieId', null)
