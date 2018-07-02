@@ -25,6 +25,7 @@ app.post('/track', (req, res) => {
     if (cookieId && type) {
         saveTracking(cookieId, type)
         res.sendStatus(200)
+        log.info(cookieId + " # " + type)
     } else {
         res.sendStatus(400)
     }
