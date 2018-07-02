@@ -1,8 +1,14 @@
 const _ = require('lodash')
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
+const fs = require('fs');
+const log = require('simple-node-logger').createSimpleLogger();
+const cors = require('cors')
 
 app.use(express.json())
+app.use(morgan('combined'))
+app.use(cors())
 
 app.get('/track', (req, res) => {
     res.send(store)
@@ -30,6 +36,14 @@ function saveTracking(cookieId, type) {
         key = [{type: type, timestamp: new Date()}]
         store[cookieId] = key
     }
+    var json = JSON.stringify(store);
+    try {
+        fs.writeFile('store.json', json, 'utf8', ()=> {
+            log.info('store.json updated')
+        });
+    } catch(error) {
+        log.error(error)
+    }
 }
 
-app.listen(3000, () => console.log('Example app listening on port 3000'))
+app.listen(3000, () => log.info('Example app listening on port 3000'))
