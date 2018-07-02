@@ -4,7 +4,7 @@ module.exports = {
       script: "index.js"
     }],
     deploy: {
-      production: {
+      aws: {
         key: "/Users/victor/victor2.pem",
         user: "ec2-user",
         host: ["34.236.148.171"],
