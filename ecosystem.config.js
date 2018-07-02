@@ -1,7 +1,10 @@
 module.exports = {
     apps: [{
       name: "habit",
-      script: "index.js"
+      script: "index.js",
+      env: {
+        PORT: "8080",
+      }
     }],
     deploy: {
       aws: {
