@@ -46,4 +46,4 @@ function saveTracking(cookieId, type) {
     }
 }
 
-app.listen(3000, () => log.info('Example app listening on port 3000'))
+app.listen(process.env.PORT, () => log.info('Example app listening on port ' + process.env.PORT))
